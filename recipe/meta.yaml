@@ -1,5 +1,5 @@
 {% set name = "asv" %}
-{% set version = "0.6.5" %}
+{% set version = "0.6.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,19 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a8eeb7c5037cd78c146bd727d27203132438d4d62f36e669eb0cd5d63da0cf39
-  patches:
-    # https://github.com/airspeed-velocity/asv/pull/1558
-    - 1558-correctly-formed-conda-requirements.patch
-    # https://github.com/airspeed-velocity/asv/pull/1559
-    - 1559-correct_units_meminfo.patch
-    # https://github.com/airspeed-velocity/asv/pull/1560
-    - 1560-launch_method_in_config.patch
-    # https://github.com/airspeed-velocity/asv/pull/1565
-    - 1565-fix-usage-of-launch-method-config.patch
+  sha256: 82e47105db8f56d9b1e54763dd01a1709d2722ad2f727b21521628c3e110bdc6
+
 
 build:
-  number: 3
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
@@ -37,7 +29,7 @@ requirements:
     - wheel
   run:
     - python
-    - asv_runner >=0.2.1
+    - asv_runner >=0.2.5
     - json5
     - tabulate
     - virtualenv
