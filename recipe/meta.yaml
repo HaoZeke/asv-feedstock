@@ -11,7 +11,7 @@ source:
 
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
@@ -31,9 +31,12 @@ requirements:
     - python
     - asv_runner >=0.2.5
     - json5
+    - python-build
     - tabulate
     - virtualenv
-    - tomli
+    - packaging
+    - importlib-metadata
+    - tomli  # [py<311]
     - colorama  # [win]
     - pyyaml    # [python_impl != "pypy"]
     - pympler   # [python_impl != "pypy"]
@@ -41,6 +44,10 @@ requirements:
 test:
   imports:
     - asv
+  requires:
+    - pip
+  commands:
+    - pip check
 #  requires:
 #    - pytest
 #  files:
