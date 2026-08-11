@@ -11,8 +11,8 @@ source:
 
 
 build:
-  number: 1
-  script: {{ PYTHON }} -m pip install . -vv
+  number: 3
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
@@ -31,9 +31,12 @@ requirements:
     - python
     - asv_runner >=0.2.5
     - json5
+    - python-build
     - tabulate
     - virtualenv
-    - tomli
+    - packaging
+    - importlib-metadata
+    - tomli  # [py<311]
     - colorama  # [win]
     - pyyaml    # [python_impl != "pypy"]
     - pympler   # [python_impl != "pypy"]
@@ -41,6 +44,11 @@ requirements:
 test:
   imports:
     - asv
+  requires:
+    - pip
+  commands:
+    - python -c "from importlib.metadata import version; print('asv-runner', version('asv-runner'))"
+    - pip check
 #  requires:
 #    - pytest
 #  files:
