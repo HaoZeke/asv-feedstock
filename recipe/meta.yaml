@@ -11,8 +11,8 @@ source:
 
 
 build:
-  number: 2
-  script: {{ PYTHON }} -m pip install . -vv
+  number: 3
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
@@ -47,6 +47,7 @@ test:
   requires:
     - pip
   commands:
+    - python -c "from importlib.metadata import version; print('asv-runner', version('asv-runner'))"
     - pip check
 #  requires:
 #    - pytest
